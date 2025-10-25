@@ -23,7 +23,7 @@
     prefer the use of full named parameter (eg: "-ISO") as you can put in the order you want.
 
 .NOTES
-    Auteur: ntdevlabs
+    Auteur: ntdevlabs and baoiscoding
     Date: 09-07-25
 #>
 
@@ -266,11 +266,6 @@ foreach ($package in $packagesToRemove) {
 
 Write-Output "Removing Edge:"
 Remove-Item -Path "$ScratchDisk\scratchdir\Program Files (x86)\Microsoft\Edge" -Recurse -Force | Out-Null
-Remove-Item -Path "$ScratchDisk\scratchdir\Program Files (x86)\Microsoft\EdgeUpdate" -Recurse -Force | Out-Null
-Remove-Item -Path "$ScratchDisk\scratchdir\Program Files (x86)\Microsoft\EdgeCore" -Recurse -Force | Out-Null
-& 'takeown' '/f' "$ScratchDisk\scratchdir\Windows\System32\Microsoft-Edge-Webview" '/r' | Out-Null
-& 'icacls' "$ScratchDisk\scratchdir\Windows\System32\Microsoft-Edge-Webview" '/grant' "$($adminGroup.Value):(F)" '/T' '/C' | Out-Null
-Remove-Item -Path "$ScratchDisk\scratchdir\Windows\System32\Microsoft-Edge-Webview" -Recurse -Force | Out-Null
 Write-Output "Removing OneDrive:"
 & 'takeown' '/f' "$ScratchDisk\scratchdir\Windows\System32\OneDriveSetup.exe" | Out-Null
 & 'icacls' "$ScratchDisk\scratchdir\Windows\System32\OneDriveSetup.exe" '/grant' "$($adminGroup.Value):(F)" '/T' '/C' | Out-Null
@@ -361,6 +356,9 @@ Write-Output "Prevents installation of Teams:"
 Set-RegistryValue 'HKLM\zSOFTWARE\Policies\Microsoft\Teams' 'DisableInstallation' 'REG_DWORD' '1'
 Write-Output "Prevent installation of New Outlook":
 Set-RegistryValue 'HKLM\zSOFTWARE\Policies\Microsoft\Windows\Windows Mail' 'PreventRun' 'REG_DWORD' '1'
+## Prevents Windows update
+Write-Output "Prevent Windows update:"
+Set-RegistryValue 'HKLM\zSOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU' 'NoAutoUpdate' 'REG_DWORD' '1'
 
 Write-Host "Deleting scheduled task definition files..."
 $tasksPath = "$ScratchDisk\scratchdir\Windows\System32\Tasks"
