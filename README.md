@@ -76,8 +76,6 @@ C:/path/to/your/tiny11/script.ps1 -ISO <letter> -SCRATCH <letter>
           <li>OneDrive</li>
         </ul>
       </td>
-      <td>
-      </td>
     </tr>
   </tbody>
 </table>
