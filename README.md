@@ -1,8 +1,9 @@
-# tiny11builder
-*Scripts to build a trimmed-down Windows 11 image - now in **PowerShell**!*
+# bao11builder
+*Scripts to build a more trimmed-down Windows 11 image - now in **PowerShell**!*
+Fork of **tiny11builder**
 
 ## Introduction :
-Tiny11 builder, now completely overhauled. <br> After more than a year (for which I am so sorry) of no updates, tiny11 builder is now a much more complete and flexible solution - one script fits all. Also, it is a steppingstone for an even more fleshed-out solution.
+Bao11 builder, now completely overhauled. <br>bao11builder is now a  complete and flexible solution - one script fits all. Also, it is a steppingstone for an even more fleshed-out solution.
 
 You can now use it on ANY Windows 11 release (not just a specific build), as well as ANY language or architecture.
 This is made possible thanks to the much-improved scripting capabilities of PowerShell, compared to the older Batch release.
@@ -12,14 +13,11 @@ The script has also been updated to use DISM's recovery compression, resulting i
 Also included is an unattended answer file, which is used to bypass the Microsoft Account on OOBE and to deploy the image with the `/compact` flag.
 It's open-source, **so feel free to add or remove anything you want!** Feedback is also much appreciated.
 
-Also, for the very first time, **introducing tiny11 core builder**! A more powerful script, designed for a quick and dirty development testbed. Just the bare minimum, none of the fluff. 
-This script generates a significantly reduced Windows 11 image. However, **it's not suitable for regular use due to its lack of serviceability - you can't add languages, updates, or features post-creation**. tiny11 Core is not a full Windows 11 substitute but a rapid testing or development tool, potentially useful for VM environments.
-
 ---
 
 ## ⚠️ Script versions:
 - **tiny11maker.ps1** : The regular script, which removes a lot of bloat but keeps the system serviceable. You can add languages, updates, and features post-creation. This is the recommended script for regular use.
-- ⚠️ **tiny11coremaker.ps1** : The core script, which removes even more bloat but also removes the ability to service the image. You cannot add languages, updates, or features post-creation. This is recommended for quick testing or development use.
+- ⚠️ **tiny11coremaker.ps1** : Not yet
 
 ## Instructions:
 1. Download Windows 11 from the [Microsoft website](https://www.microsoft.com/software-download/windows11) or [Rufus](https://github.com/pbatard/rufus)
@@ -49,7 +47,6 @@ C:/path/to/your/tiny11/script.ps1 -ISO <letter> -SCRATCH <letter>
   <tbody>
     <tr>
       <th>Tiny11maker</th>
-      <th>Tiny11coremaker</th>
     </tr>
     <tr>
       <td>
@@ -75,18 +72,11 @@ C:/path/to/your/tiny11/script.ps1 -ISO <letter> -SCRATCH <letter>
           <li>QuickAssist</li>
           <li>Internet Explorer</li>
           <li>Tablet PC Math</li>
-          <li>Edge</li>
+          <li>Edge(only Edge folder)</li>
           <li>OneDrive</li>
         </ul>
       </td>
       <td>
-        <ul>
-          <li>all from regular tiny +</li>
-          <li>Windows Component Store (WinSxS)</li>
-          <li>Windows Defender (only disabled, can be enabled back if needed)</li>
-          <li>Windows Update (wouldn't work without WinSxS, enabling it would put the system in a state of failure)</li>
-          <li>WinRE</li>
-        </ul>
       </td>
     </tr>
   </tbody>
@@ -98,25 +88,14 @@ You will be asked during image creation if you want to enable .net 3.5 support!
 ---
 
 ## Known issues:
-- Although Edge is removed, there are some remnants in the Settings, but the app in itself is deleted. 
+- The only things that remove is the Edge folder, for more stable(ornot)
 - You might have to update Winget before being able to install any apps, using Microsoft Store.
 - Outlook and Dev Home might reappear after some time. This is an ongoing battle, though the latest script update tries to prevent this more aggressively.
 - If you are using this script on arm64, you might see a glimpse of an error while running the script. This is caused by the fact that the arm64 image doesn't have OneDriveSetup.exe included in the System32 folder.
+- Windows will not be update anymore(if you want,go to registry HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU and set NoAutoUpate value to 0)
 
 ---
-
-## Features to be implemented:
-- ~~disabling telemetry~~ (Implemented in the 04-29-24 release!)
-- ~~more ad suppression~~ (Partially implemented in the 09-06-25 release!)
-- improved language and arch detection
-- more flexibility in what to keep and what to delete
-- maybe a GUI???
-
-And that's pretty much it for now!
-## ❤️ Support the Project
-
-If this project has helped you, please consider showing your support! A small donation helps me dedicate more time to projects like this.
-Thank you!
-
-**[Patreon](http://patreon.com/ntdev) | [PayPal](http://paypal.me/ntdev2) | [Ko-fi](http://ko-fi.com/ntdev)**
-Thanks for trying it and let me know how you like it!
+Bao11builder is a fork from tiny11builder
+Thank you for using!
+Credit to NTDev and contributors
+Maybe not stable🥶🥀
