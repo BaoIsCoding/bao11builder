@@ -94,6 +94,9 @@ You will be asked during image creation if you want to enable .net 3.5 support!
 
 ---
 Bao11builder is a fork from tiny11builder
+---
 Thank you for using!
+---
 Credit to NTDev and contributors
+---
 Maybe not stable🥶🥀
